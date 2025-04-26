@@ -1,4 +1,11 @@
-// Models/CoinsListResponse.swift
+//
+//  CoinsListResponse.swift
+//  CryptoBit
+//
+//  Created by Wycliff Kamau on 24/04/2025.
+//
+
+
 import Foundation
 
 struct CoinsListResponse: Decodable {

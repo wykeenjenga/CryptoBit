@@ -6,7 +6,6 @@
 //
 
 
-// Models/Stats.swift
 import Foundation
 
 struct Stats: Decodable {

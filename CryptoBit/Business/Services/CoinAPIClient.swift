@@ -11,31 +11,40 @@ import Combine
 
 final class CoinAPIClient {
     static let shared = CoinAPIClient()
-    private let baseURL = URL(string: "https://api.coinranking.com/v2/")!
-    private let apiKey = "your-api-key"
-    
     private init() {}
 
-    /// Fetches detailed info for a single coin by UUID.
-    func fetchCoinDetail(uuid: String) -> AnyPublisher<CoinDetail, Error> {
-        // Build URL: https://api.coinranking.com/v2/coin/{uuid}
-        let url = baseURL.appendingPathComponent("coin/\(uuid)")
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-        components.queryItems = []
-        
-        var request = URLRequest(url: components.url!)
-        request.httpMethod = "GET"
-        request.setValue(apiKey, forHTTPHeaderField: "x-access-token")
-        
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
-            .decode(type: CoinDetailResponse.self, decoder: JSONDecoder())
-            .map { $0.data.coin }
-            .receive(on: DispatchQueue.main)
+    /// Fetch a single coin’s detail by its id.
+    func fetchCoinDetail(uuid: String, timeRange: String) -> AnyPublisher<CoinDetail, APIError> {
+        return APIGateway.shared
+            .perform(path: "coin/\(uuid)", queryItems: [
+                URLQueryItem(name: "timePeriod",  value: String(timeRange))
+            ])
+            .print("🔍 Detail")
+            .map { (response: CoinDetailResponse) in response.data.coin }
+            .eraseToAnyPublisher()
+    }
+
+    /// Fetch a paginated list of coins from the endpoint APAI
+    func fetchCoins(offset: Int, limit: Int) -> AnyPublisher<[Coin], APIError> {
+        let items = [
+            URLQueryItem(name: "limit",  value: String(limit)),
+            URLQueryItem(name: "offset", value: String(offset))
+        ]
+        return APIGateway.shared
+            .perform(path: "coins", queryItems: items)
+            .map { (response: CoinsListResponse) in response.data.coins }
             .eraseToAnyPublisher()
     }
     
-    
-    
-    
+    /// Fetches the raw response (stats + coinsds2)
+    func fetchCoinsResponse(offset: Int, limit: Int) -> AnyPublisher<CoinsListResponse, APIError> {
+        let items = [
+            URLQueryItem(name: "limit",  value: String(limit)),
+            URLQueryItem(name: "skip", value: String(offset))
+        ]
+        return APIGateway.shared
+            .perform(path: "coins", queryItems: items)
+            .eraseToAnyPublisher()
+    }
+
 }

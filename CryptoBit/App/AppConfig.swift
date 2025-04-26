@@ -1,6 +1,14 @@
+//
+//  AppConfig.swift
+//  CryptoBit
+//
+//  Created by Wycliff Kamau on 24/04/2025.
+//
+
+
 import Foundation
 
-/// Simple wrapper around your Info.plist keys
+
 enum AppConfig {
     private static let info = Bundle.main.infoDictionary
 

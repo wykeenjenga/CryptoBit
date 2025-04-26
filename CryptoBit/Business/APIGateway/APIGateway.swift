@@ -56,25 +56,51 @@ final class APIGateway {
     ///   - queryItems: any URLQueryItem array for pagination, filters, etc.
     ///   - extraHeaders: if you need per-call overrides
     func perform<T: Decodable>( path: String, method: HTTPMethod = .get, queryItems: [URLQueryItem]? = nil, extraHeaders: [String:String]? = nil) -> AnyPublisher<T, APIError> {
-        // Build full URL
-        guard var comps = URLComponents( url: baseURL.appendingPathComponent(path), resolvingAgainstBaseURL: false) else {
+        
+        guard var comps = URLComponents(
+            url: baseURL.appendingPathComponent(path),
+            resolvingAgainstBaseURL: false
+        ) else {
+            return Fail(error: .invalidURL).eraseToAnyPublisher()
+        }
+        comps.queryItems = queryItems
+        
+        guard let url = comps.url else {
             return Fail(error: .invalidURL).eraseToAnyPublisher()
         }
         
-        comps.queryItems = queryItems
-
-        guard let url = comps.url else { return Fail(error: .invalidURL).eraseToAnyPublisher()
-}
-
-        // Assemble request
         var req = URLRequest(url: url)
         req.httpMethod = method.rawValue
         defaultHeaders
             .merging(extraHeaders ?? [:]) { $1 }
             .forEach { req.setValue($1, forHTTPHeaderField: $0) }
+        
 
-        // Execute
+        print("➡️ [API] \(method.rawValue) \(req.url?.absoluteString ?? "nil URL")")
+        if let headers = req.allHTTPHeaderFields {
+            print("   headers: \(headers)")
+        }
+        if let body = req.httpBody, let str = String(data: body, encoding: .utf8) {
+            print("   body: \(str)")
+        }
+        
         return URLSession.shared.dataTaskPublisher(for: req)
+            .handleEvents(
+                receiveOutput: { output in
+                    if let httpResp = output.response as? HTTPURLResponse {
+                        print("⬅️ [API] \(httpResp.statusCode) \(httpResp.url?.absoluteString ?? "")")
+                    }
+
+                    if let json = String(data: output.data, encoding: .utf8) {
+                        print("📦 [API] Response Body: \(json)")
+                    }
+                },
+                receiveCompletion: { completion in
+                    if case .failure(let err) = completion {
+                        print("⚠️ [API] Completion with error: \(err)")
+                    }
+                }
+            )
             .tryMap { output in
                 guard let response = output.response as? HTTPURLResponse,
                       200..<300 ~= response.statusCode else {
@@ -90,4 +116,5 @@ final class APIGateway {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+
 }

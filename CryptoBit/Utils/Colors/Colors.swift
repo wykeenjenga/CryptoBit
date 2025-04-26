@@ -1,71 +1,16 @@
+//
+//  Colors.swift
+//  CryptoBit
+//
+//  Created by Wycliff Kamau on 23/04/2025.
+//
+
+
 import Foundation
 import SwiftUI
 
 struct Colors {
-    static let light_gray5 = Color(red: 0.96, green: 0.96, blue: 0.97)
-    static let accentColor = Color(red: 1, green: 0.36, blue: 0)
-    static let skyBlue = Color(red: 0.847, green: 0.941, blue: 0.992)
-    static let black100 = Color(red: 0.38, green: 0.37, blue: 0.37)
-    static let gray_light = Color(red: 0.91, green: 0.91, blue: 0.91)
-    static let gray = Color(red: 0.86, green: 0.86, blue: 0.86)
-    static let textFieldBorder = Color(red: 0.94, green: 0.94, blue: 0.94)
-    static let dark_blue = Color(red: 0.1, green: 0.11, blue: 0.16)
-    static let textColor = Color(red: 0.26, green: 0.26, blue: 0.26)
-    static let lineShadow = Color(red: 0.59, green: 0.59, blue: 0.59)
-    static let lightGray = Color(red: 0.94, green: 0.94, blue: 0.94)
-    static let lightGray1 = Color(red: 0.95, green: 0.95, blue: 0.95)
-    static let wishlistedStaysBg = Color(red: 1, green: 0.85, blue: 0.85)
-    static let wishlistedExpereincesBg = Color(red: 0.85, green: 0.96, blue: 1)
-    static let wishlistedSpecialOffersBg = Color(red: 0.86, green: 1, blue: 0.85)
-    static let wishlistedOffersBg = Color(red: 0.85, green: 0.88, blue: 1)
-    static let hotPink = Color(red: 0.91, green: 0.12, blue: 0.39)
-    static let shimmerColor = Color(red: 0.98, green: 0.98, blue: 0.98)
-    static let deepGreen = Color(red: 0, green: 0.29, blue: 0.14)
-    static let mpesaGreen = Color(red: 0.89, green: 0.95, blue: 0.86)
-    static let lightPurple = Color(red: 0.81, green: 0.84, blue: 1)
-    static let lightDeepGreen = Color(red: 0.89, green: 0.95, blue: 0.86)
-    static let deemBlackMobile: Color = Color(red: 0.38, green: 0.37, blue: 0.37)
-    static let profileBackground: Color = Color(red: 0.98, green: 0.98, blue: 0.98)
-    static let orange: Color = Color(red: 1, green: 0.4, blue: 0)
-    static let earningLightGreen: Color = Color(red: 0.83, green: 0.99, blue: 0.82)
-    static let accentLight: Color = Color(red: 0.99, green: 0.82, blue: 0.82)
-    static let green: Color = Color(red: 0.37, green: 0.75, blue: 0.33)
-    static let light_green: Color = Color(red: 0.04, green: 0.51, blue: 0.07)
-    static let lightBlue: Color = Color(red: 0.86, green: 0.94, blue: 0.95)
-    static let blueLight: Color = Color(red: 0.91, green: 0.94, blue: 0.99)
-    static let purpleLight: Color = Color(red:  0.92, green: 0.67, blue: 0.94)
-    static let purple: Color = Color(red: 0.28, green: 0.14, blue: 0.91)
-    static let lightPink: Color = Color(red: 0.99, green: 0.91, blue: 0.91)
-    static let lightPink1: Color = Color(red: 1, green: 0.96, blue: 0.93)
-    static let graySecondary: Color = Color(red: 0.79, green: 0.78, blue: 0.84)
-    static let lightOrange: Color = Color(red: 0.98, green: 0.87, blue: 0.87)
-    static let analyticsGreen: Color = Color(red: 0.4, green: 0.76, blue: 0.23)
-    static let accentSecondary: Color = Color(red: 1, green: 0.96, blue: 0.93)
-    static let lightBlue2: Color = Color(red: 0.76, green: 0.91, blue: 0.99)
-    static let orangeLight: Color = Color(red: 0.95, green: 0.49, blue: 0.13)
-    static let orangeLight2: Color = Color(red: 1, green: 0.96, blue: 0.93)
-    static let mustard: Color = Color(red: 1, green: 0.69, blue: 0)
-    static let lightGreen: Color = Color(red: 0.57, green: 0.89, blue: 0)
-    static let darkGrey = Color(red: 0.58, green: 0.58, blue: 0.58)
-    static let greyBorder = Color(red: 0.9, green: 0.9, blue: 0.9)
-    static let lightAccentBlue = Color(red: 0.86, green: 0.94, blue: 0.95)
-    static let airbnbPink = Color(red: 0.91, green: 0.12, blue: 0.39)
-    static let bookingDotComBlue = Color(red: 0.3, green: 0.49, blue: 0.98)
-    static let analyticsBlue: Color = Color(red: 0.91, green: 0.94, blue: 1)
-    static let pinGray: Color = Color(red: 0.85, green: 0.85, blue: 0.85)
-    static let pinkLight: Color = Color(red: 0.98, green: 0.87, blue: 0.87)
-    static let fadedBlue = Color(red: 0.76, green: 0.91, blue: 0.99).opacity(0.66)
-    static let gray2 = Color(red: 0.96, green: 0.96, blue: 0.97)
-    static let red = Color(red: 0.83, green: 0.07, blue: 0.07)
-    static let green1 = Color(red: 0.36, green: 0.83, blue: 0.07)
-    static let earningLightBlue: Color = Color(red: 0.76, green: 0.91, blue: 0.99).opacity(0.66)
-    static let itineraryTitle: Color = Color(red: 1, green: 0.96, blue: 0.93)
-    static let itineraryTime: Color = Color(red: 1, green: 0.96, blue: 0.93)
-    static let descriptColor: Color = Color(red: 0.26, green: 0.26, blue: 0.26)
-    static let lightGray2 = Color(red: 0.89, green: 0.89, blue: 0.89)
-    static let redStatus: Color = Color(red: 0.83, green: 0.07, blue: 0.07)
-    static let greenStatus: Color = Color(red: 0.04, green: 0.51, blue: 0.07)
-    static let greenStatusBackground: Color = Color(red: 0.36, green: 0.83, blue: 0.07)
-    static let actionBlue: Color = Color(red: 0, green: 0.21, blue: 0.33)
+    
+    static let dark_gray = "2D2F33"
     
 }
