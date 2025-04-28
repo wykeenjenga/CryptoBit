@@ -153,13 +153,7 @@ CryptoBit/
 
 ---
 
-## Screenshots & Videos
-
-### Screenshots
-![Coins List](docs/screenshots/coins_list.png)
-![Coin Detail](docs/screenshots/coin_detail.png)
-![Favorites](docs/screenshots/favorites.png)
-
+## Screenshots & Demo Video
 ### Demo Video
 https://github.com/user-attachments/assets/e94af43b-8532-45a0-b75f-df0078becd66
 
