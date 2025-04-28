@@ -30,15 +30,15 @@ CryptoBit is an iOS application that fetches and displays the top 100 cryptocurr
 ## Features
 
 - **Top 100 Coins List** (paginated 20 at a time)
-  - Icon, Name, Current Price, 24h Change
+  - Coin Icon, Name, Current Price, 24h Change graph 
   - Filter by price or 24h performance
-  - Swipe to favorite/unfavorite
+  - Swipe to favorite
 - **Coin Detail**
-  - Name, Price, 24h Change
-  - Interactive performance chart with time-window filters (1D, 1W, 1M)
+  - Coin Icon, Name, Current Price, 24h Change graph 
+  - Interactive performance chart with time-window filters (1 Day, 1Week, 1Moonth etc...)
   - Additional stats (market cap, volume, rank)
 - **Favorites**
-  - Persistent list of favorited coins
+  - Persistent list of favorited coins 
   - Swipe to remove from favorites
 - **Animated SwiftUI Splash Screen**
 
@@ -70,7 +70,7 @@ CryptoBit is an iOS application that fetches and displays the top 100 cryptocurr
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/yourusername/cryptobit.git
+   git clone https://github.com/wykeenjenga/CryptoBit.git
    cd cryptobit
    ```
 2. **Install dependencies**
@@ -131,7 +131,7 @@ CryptoBit/
 - Supporting **iOS 14+** to leverage SwiftUI integration.
 - Using **Core Data** for favorites persistence.
 - Employing **Combine** for reactive state management.
-- Hybrid UI: performance-critical lists in UIKit, micro-views in SwiftUI.
+- Hybrid UI: performance-critical lists using UITableview and cells in UIKit, views in SwiftUI.
 
 ---
 
@@ -187,4 +187,4 @@ https://github.com/user-attachments/assets/e94af43b-8532-45a0-b75f-df0078becd66
 
 ## License
 
-MIT © 2025 Your Name
+MIT © 2025 Wykee Njenga
