@@ -25,12 +25,14 @@ class CoinListViewModel: ObservableObject {
     @Published var filteredCoins: [Coin] = []
     
     private var cancellables = Set<AnyCancellable>()
-    private let context = CoreDataManager.shared.context
+    ///private let context = CoreDataManager.shared.context
     
-    init() {
-        fetchFavorites()
+    private let context: NSManagedObjectContext
+
+    init(context: NSManagedObjectContext = CoreDataManager.shared.context) {
+        self.context = context
     }
-    
+
     //MARK: - filters
     
     func sortByPriceDescending() {
@@ -99,7 +101,6 @@ class CoinListViewModel: ObservableObject {
     }
     
     //MARK: - Local DB
-    
     private func fetchFavorites() {
         let request: NSFetchRequest<FavoriteCoin> = FavoriteCoin.fetchRequest()
         do {
@@ -112,6 +113,10 @@ class CoinListViewModel: ObservableObject {
     
     func toggleFavorite(_ coin: Coin) {
         let uuid = coin.uuid
+        let name = coin.name
+        let price = coin.price
+        let symbol = coin.symbol
+        let imageUrl = coin.iconUrl
         
         if favorites.contains(uuid) {
             let request: NSFetchRequest<FavoriteCoin> = FavoriteCoin.fetchRequest()
@@ -122,6 +127,10 @@ class CoinListViewModel: ObservableObject {
         } else {
             let fav = FavoriteCoin(context: context)
             fav.uuid = uuid
+            fav.name = name
+            fav.price = price
+            fav.iconUrl = imageUrl
+            fav.symbol = symbol
         }
         
         CoreDataManager.shared.saveContext()

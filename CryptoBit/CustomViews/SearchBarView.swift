@@ -10,7 +10,7 @@ import Combine
 
 struct SearchBarView: View {
     @Environment(\.presentationMode) private var presentationMode
-    @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var viewModel: CoinListViewModel
     
     @FocusState var isKeyboardShowing: Bool
     @State var showEdit: Bool = false

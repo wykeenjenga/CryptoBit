@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		882575742DBAEC370086506A /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 882575732DBAEC370086506A /* ActivityIndicatorView */; };
+		882575A52DBD542C0086506A /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 882575A42DBD542C0086506A /* SkeletonView */; };
 		8880D0972DBAD1F80045E2A3 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8880D0962DBAD1F80045E2A3 /* AlamofireImage */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,40 @@
 			);
 			target = 889A997A2DB97ACF00912A4A /* CryptoBit */;
 		};
+		88B9D6EC2DBF6AE50096F76C /* Exceptions for "CryptoBit" folder in "CryptoBitTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Business/Models/Coin.swift,
+				Business/Models/CoinDetailResponse.swift,
+				Business/Models/CoinsListResponse.swift,
+				Business/Models/Stats.swift,
+			);
+			target = 889A99942DB97AD200912A4A /* CryptoBitTests */;
+		};
+		88B9D6ED2DBF6AE50096F76C /* Exceptions for "CryptoBit" folder in "CryptoBitUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Business/Models/Coin.swift,
+				Business/Models/CoinDetailResponse.swift,
+				Business/Models/CoinsListResponse.swift,
+				Business/Models/Stats.swift,
+			);
+			target = 889A999E2DB97AD200912A4A /* CryptoBitUITests */;
+		};
+		88B9D6FA2DBF6B990096F76C /* Exceptions for "CryptoBitTests" folder in "CryptoBit" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Support/StubURLProtocol.swift,
+			);
+			target = 889A997A2DB97ACF00912A4A /* CryptoBit */;
+		};
+		88B9D6FB2DBF6B990096F76C /* Exceptions for "CryptoBitTests" folder in "CryptoBitUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Support/StubURLProtocol.swift,
+			);
+			target = 889A999E2DB97AD200912A4A /* CryptoBitUITests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -61,12 +96,18 @@
 			exceptions = (
 				889A99A72DB97AD200912A4A /* Exceptions for "CryptoBit" folder in "CryptoBit" target */,
 				882575712DBAE4020086506A /* Exceptions for "CryptoBit" folder in "Copy Bundle Resources" phase from "CryptoBit" target */,
+				88B9D6EC2DBF6AE50096F76C /* Exceptions for "CryptoBit" folder in "CryptoBitTests" target */,
+				88B9D6ED2DBF6AE50096F76C /* Exceptions for "CryptoBit" folder in "CryptoBitUITests" target */,
 			);
 			path = CryptoBit;
 			sourceTree = "<group>";
 		};
 		889A99982DB97AD200912A4A /* CryptoBitTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				88B9D6FA2DBF6B990096F76C /* Exceptions for "CryptoBitTests" folder in "CryptoBit" target */,
+				88B9D6FB2DBF6B990096F76C /* Exceptions for "CryptoBitTests" folder in "CryptoBitUITests" target */,
+			);
 			path = CryptoBitTests;
 			sourceTree = "<group>";
 		};
@@ -83,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				882575742DBAEC370086506A /* ActivityIndicatorView in Frameworks */,
+				882575A52DBD542C0086506A /* SkeletonView in Frameworks */,
 				8880D0972DBAD1F80045E2A3 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,6 +188,7 @@
 			packageProductDependencies = (
 				8880D0962DBAD1F80045E2A3 /* AlamofireImage */,
 				882575732DBAEC370086506A /* ActivityIndicatorView */,
+				882575A42DBD542C0086506A /* SkeletonView */,
 			);
 			productName = CryptoBit;
 			productReference = 889A997B2DB97ACF00912A4A /* CryptoBit.app */;
@@ -232,6 +275,7 @@
 			packageReferences = (
 				8880D0952DBAD1F80045E2A3 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				882575722DBAEC370086506A /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+				882575A32DBD542C0086506A /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 889A997C2DB97ACF00912A4A /* Products */;
@@ -606,6 +650,14 @@
 				minimumVersion = 1.2.1;
 			};
 		};
+		882575A32DBD542C0086506A /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.31.0;
+			};
+		};
 		8880D0952DBAD1F80045E2A3 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
@@ -621,6 +673,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 882575722DBAEC370086506A /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
 			productName = ActivityIndicatorView;
+		};
+		882575A42DBD542C0086506A /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 882575A32DBD542C0086506A /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 		8880D0962DBAD1F80045E2A3 /* AlamofireImage */ = {
 			isa = XCSwiftPackageProductDependency;

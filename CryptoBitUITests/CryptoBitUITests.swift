@@ -8,6 +8,34 @@
 import XCTest
 
 final class CryptoBitUITests: XCTestCase {
+    
+    let app = XCUIApplication()
+    
+    override func setUp() {
+        continueAfterFailure = false
+        app.launch()
+    }
+    
+    func testFavoritesFlow() {
+
+        app.tabBars.buttons["Coins"].tap()
+        
+        let firstCell = app.tables.cells.element(boundBy: 0)
+        XCTAssertTrue(firstCell.waitForExistence(timeout: 5))
+        
+        firstCell.swipeLeft()
+        let addToFav = firstCell.buttons["Add to Favorite"]
+        XCTAssertTrue(addToFav.waitForExistence(timeout: 1))
+        addToFav.tap()
+        
+        app.tabBars.buttons["Favorites"].tap()
+        let favCell = app.tables.cells.element(boundBy: 0)
+        favCell.swipeLeft()
+        
+        let removeFromFav = favCell.buttons["Remove"]
+        XCTAssertTrue(removeFromFav.waitForExistence(timeout: 1))
+        removeFromFav.tap()
+    }
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

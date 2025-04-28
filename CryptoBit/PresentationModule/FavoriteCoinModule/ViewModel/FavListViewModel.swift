@@ -20,7 +20,6 @@ final class FavListViewModel: ObservableObject {
     init() {
         fetchFavorites()
         
-        // Optional: observe Core Data changes automatically
         NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange, object: context)
             .sink { [weak self] _ in
                 self?.fetchFavorites()

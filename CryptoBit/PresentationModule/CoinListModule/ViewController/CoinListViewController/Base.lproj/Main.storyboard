@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--HomePage -->
+        <!--Coin List -->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="HomePage " id="BYZ-38-t0r" customClass="HomeViewController" customModule="CryptoBit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Coin List " id="BYZ-38-t0r" customClass="CoinListViewController" customModule="CryptoBit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,17 +48,12 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="K2q-4R-Hqa">
-                                <rect key="frame" x="186.66666666666666" y="374.66666666666669" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="K2q-4R-Hqa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3km-uC-tJs"/>
                             <constraint firstItem="iJq-Q7-wxY" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="3ul-ws-8Xp"/>
                             <constraint firstItem="iJq-Q7-wxY" firstAttribute="top" secondItem="vo4-ry-JYm" secondAttribute="bottom" constant="16" id="8ts-KI-HOL"/>
-                            <constraint firstItem="K2q-4R-Hqa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="HE8-nU-Ydw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iJq-Q7-wxY" secondAttribute="trailing" constant="16" id="Kts-QI-HHX"/>
                             <constraint firstItem="vo4-ry-JYm" firstAttribute="top" secondItem="JZ6-UV-z8l" secondAttribute="bottom" constant="16" id="N9P-7z-y0C"/>
                             <constraint firstItem="iJq-Q7-wxY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="U8C-nf-LHz"/>
@@ -77,7 +72,6 @@
                     <navigationItem key="navigationItem" id="ahc-7Y-1sz"/>
                     <connections>
                         <outlet property="searchFilterView" destination="vo4-ry-JYm" id="I8d-Cw-F60"/>
-                        <outlet property="spinner" destination="K2q-4R-Hqa" id="KxC-xU-421"/>
                         <outlet property="tableView" destination="iJq-Q7-wxY" id="YfR-JT-bp2"/>
                     </connections>
                 </viewController>
@@ -126,18 +120,62 @@
         <!--Favorites-->
         <scene sceneID="DCc-UM-0ha">
             <objects>
-                <viewController id="hij-f0-o9S" sceneMemberID="viewController">
+                <viewController id="hij-f0-o9S" customClass="FavListViewController" customModule="CryptoBit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V39-AQ-2J7">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHl-UY-82Q">
+                                <rect key="frame" x="16" y="167.66666666666666" width="361" height="80"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="qTa-zd-Mcj"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Y3-GC-IHS">
+                                <rect key="frame" x="16" y="59.000000000000007" width="361" height="31.333333333333336"/>
+                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here are your wish-listed cryptocurrencies. Search or tap a coin to see its latest trends and details." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMH-gp-y3D">
+                                <rect key="frame" x="16" y="98.333333333333329" width="361" height="57.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pzn-SE-GEe">
+                                <rect key="frame" x="16" y="255.66666666666669" width="361" height="513.33333333333326"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="kCZ-d4-0n5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="IMH-gp-y3D" firstAttribute="leading" secondItem="kCZ-d4-0n5" secondAttribute="leading" constant="16" id="3MI-LA-WvY"/>
+                            <constraint firstItem="CHl-UY-82Q" firstAttribute="top" secondItem="IMH-gp-y3D" secondAttribute="bottom" constant="12" id="ELC-Wh-JKo"/>
+                            <constraint firstItem="CHl-UY-82Q" firstAttribute="leading" secondItem="kCZ-d4-0n5" secondAttribute="leading" constant="16" id="EfL-wY-kUq"/>
+                            <constraint firstItem="IMH-gp-y3D" firstAttribute="top" secondItem="6Y3-GC-IHS" secondAttribute="bottom" constant="8" id="FFe-vF-Or9"/>
+                            <constraint firstItem="Pzn-SE-GEe" firstAttribute="leading" secondItem="kCZ-d4-0n5" secondAttribute="leading" constant="16" id="NL6-js-myE"/>
+                            <constraint firstItem="kCZ-d4-0n5" firstAttribute="trailing" secondItem="Pzn-SE-GEe" secondAttribute="trailing" constant="16" id="Nrx-bD-vfq"/>
+                            <constraint firstItem="Pzn-SE-GEe" firstAttribute="top" secondItem="CHl-UY-82Q" secondAttribute="bottom" constant="8" id="Pb1-EK-i11"/>
+                            <constraint firstItem="6Y3-GC-IHS" firstAttribute="top" secondItem="kCZ-d4-0n5" secondAttribute="top" id="Pem-67-EWJ"/>
+                            <constraint firstItem="kCZ-d4-0n5" firstAttribute="trailing" secondItem="CHl-UY-82Q" secondAttribute="trailing" constant="16" id="RTy-qv-nqL"/>
+                            <constraint firstItem="6Y3-GC-IHS" firstAttribute="leading" secondItem="kCZ-d4-0n5" secondAttribute="leading" constant="16" id="Vy5-jf-Tr2"/>
+                            <constraint firstItem="kCZ-d4-0n5" firstAttribute="trailing" secondItem="6Y3-GC-IHS" secondAttribute="trailing" constant="16" id="gqW-hp-R3j"/>
+                            <constraint firstItem="kCZ-d4-0n5" firstAttribute="trailing" secondItem="IMH-gp-y3D" secondAttribute="trailing" constant="16" id="z4r-ZQ-Mub"/>
+                            <constraint firstItem="Pzn-SE-GEe" firstAttribute="bottom" secondItem="kCZ-d4-0n5" secondAttribute="bottom" id="zj3-L5-O1B"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Favorites" image="star" catalog="system" selectedImage="star.fill" id="N25-Xl-vwC"/>
+                    <connections>
+                        <outlet property="searchView" destination="CHl-UY-82Q" id="7H5-YE-hLU"/>
+                        <outlet property="tableView" destination="Pzn-SE-GEe" id="0fD-uh-12h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXh-7L-GQe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1225" y="36"/>
+            <point key="canvasLocation" x="1223.6641221374045" y="35.91549295774648"/>
         </scene>
         <!--Hard Wall Tab Bar Controller-->
         <scene sceneID="fOn-Ck-jHI">

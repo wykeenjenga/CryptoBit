@@ -31,3 +31,5 @@ final class CryptoBitUITestsLaunchTests: XCTestCase {
         add(attachment)
     }
 }
+
+

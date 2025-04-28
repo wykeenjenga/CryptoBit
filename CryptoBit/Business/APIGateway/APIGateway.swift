@@ -23,9 +23,9 @@ enum APIError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .invalidURL:                 return "Invalid URL"
-        case .decodingError(let err):     return "Decoding failed: \(err)"
-        case .networkError(let err):      return "Network error: \(err.localizedDescription)"
+        case .invalidURL: return "Invalid URL"
+        case .decodingError(let err): return "Decoding failed: \(err)"
+        case .networkError(let err): return "Network error: \(err.localizedDescription)"
         case .unexpectedStatus(let code): return "Unexpected HTTP status code: \(code)"
         }
     }
@@ -33,7 +33,7 @@ enum APIError: LocalizedError {
 
 final class APIGateway {
     static let shared = APIGateway()
-
+    var session: URLSession
     private let baseURL: URL
     private let defaultHeaders: [String:String]
     private let decoder: JSONDecoder
@@ -46,6 +46,7 @@ final class APIGateway {
         ]
         self.decoder = JSONDecoder()
         self.decoder.keyDecodingStrategy = .convertFromSnakeCase
+        self.session = .shared
     }
 
     /// Perform a request and decode the JSON into `T`.
@@ -84,7 +85,7 @@ final class APIGateway {
             print("   body: \(str)")
         }
         
-        return URLSession.shared.dataTaskPublisher(for: req)
+        return session.dataTaskPublisher(for: req)
             .handleEvents(
                 receiveOutput: { output in
                     if let httpResp = output.response as? HTTPURLResponse {

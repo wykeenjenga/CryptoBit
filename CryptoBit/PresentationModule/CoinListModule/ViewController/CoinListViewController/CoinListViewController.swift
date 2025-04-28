@@ -21,13 +21,11 @@ class CoinListViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
-    private var filterHost: UIHostingController<FilterSearchView>!
+    var searchUIView: UIHostingController<FilterSearchView>!
     
     // MARK: – ViewModel
-    private let viewModel = CoinListViewModel()
-    private var cancellables = Set<AnyCancellable>()
+    let viewModel = CoinListViewModel()
+    var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,69 +90,11 @@ class CoinListViewController: UIViewController {
     }
     
     private func embedFilterSearchView() {
-      filterHost = UIHostingController(rootView: FilterSearchView(viewModel: viewModel))
-      addChild(filterHost)
-      searchFilterView.addSubview(filterHost.view)
-      filterHost.view.translatesAutoresizingMaskIntoConstraints = false
+        searchUIView = UIHostingController(rootView: FilterSearchView(viewModel: viewModel))
+        addChild(searchUIView)
+        searchFilterView.addSubview(searchUIView.view)
+        searchUIView.view.translatesAutoresizingMaskIntoConstraints = false
     }
     
 }
 
-
-
-// MARK: – UITableViewDataSource
-extension CoinListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.isSearching ? viewModel.filteredCoins.count : viewModel.coins.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView[CoinListCell.self, indexPath]
-        let coin = viewModel.isSearching ? viewModel.filteredCoins[indexPath.row] : viewModel.coins[indexPath.row]
-        cell.configure(with: coin)
-        return cell
-    }
-
-}
-
-
-extension CoinListViewController: SkeletonTableViewDataSource {
-    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return "CoinListCell"
-    }
-}
-
-// MARK: – UITableViewDelegate
-extension CoinListViewController: UITableViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        let threshold = scrollView.contentSize.height - scrollView.bounds.height - 100
-        if scrollView.contentOffset.y > threshold && !viewModel.isLoading {
-            viewModel.loadCoins(offset: viewModel.coins.count, limit: 20)
-        }
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let coin = viewModel.coins[indexPath.row]
-        
-        let detailView = CoinDetailView(uuid: coin.uuid)
-        
-        let hostingVC = UIHostingController(rootView: detailView)
-        
-        navigationController?.pushViewController(hostingVC, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath ) -> UISwipeActionsConfiguration? {
-        let coin = viewModel.coins[indexPath.row]
-        
-        let favAction = UIContextualAction(style: .normal, title: "★ Add to Favorite") { [weak self] _, _, completion in
-            self?.viewModel.toggleFavorite(coin)
-            completion(true)
-        }
-        
-        favAction.backgroundColor = UIColor(hex: "#2D2F33")
-        
-        return UISwipeActionsConfiguration(actions: [favAction])
-    }
-}

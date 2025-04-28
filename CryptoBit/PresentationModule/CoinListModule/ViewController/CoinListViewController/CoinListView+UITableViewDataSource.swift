@@ -16,9 +16,16 @@ extension CoinListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView[CoinListCell.self, indexPath]
-        let coin = viewModel.isSearching ? viewModel.filteredCoins[indexPath.row] : viewModel.coins[indexPath.row]
-        cell.configure(with: coin)
+
+        let data = viewModel.isSearching ? viewModel.filteredCoins : viewModel.coins
+        guard indexPath.row < data.count else {
+            return cell
+        }
+
+        cell.configure(with: data[indexPath.row])
         return cell
     }
+    
+    
 
 }

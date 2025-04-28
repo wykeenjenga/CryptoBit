@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct FilterSearchView: View {
-  @ObservedObject var viewModel: HomeViewModel
+  @ObservedObject var viewModel: CoinListViewModel
   
     var body: some View {
         VStack(spacing: 8) {
