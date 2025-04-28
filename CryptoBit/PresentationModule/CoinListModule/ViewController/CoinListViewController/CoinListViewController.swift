@@ -8,14 +8,15 @@
 import UIKit
 import Combine
 import SwiftUI
+import SkeletonView
 
-class HomeViewController: UIViewController {
+class CoinListViewController: UIViewController {
 
     @IBOutlet weak var searchFilterView: UIView!
     
     @IBOutlet weak var tableView: UITableView!{
         didSet{
-            self.tableView.register(CoinCell.self)
+            self.tableView.register(CoinListCell.self)
             self.tableView.backgroundColor = .clear
         }
     }
@@ -25,7 +26,7 @@ class HomeViewController: UIViewController {
     private var filterHost: UIHostingController<FilterSearchView>!
     
     // MARK: – ViewModel
-    private let viewModel = HomeViewModel()
+    private let viewModel = CoinListViewModel()
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -48,7 +49,7 @@ class HomeViewController: UIViewController {
         viewModel.$isLoading
             .receive(on: RunLoop.main)
             .sink { [weak self] loading in
-                loading ? self?.spinner.startAnimating() : self?.spinner.stopAnimating()
+                loading ? self?.tableView.showAnimatedGradientSkeleton() : self?.tableView.hideSkeleton()
             }
             .store(in: &cancellables)
         
@@ -85,9 +86,10 @@ class HomeViewController: UIViewController {
     private func setupLayout() {
         tableView.dataSource = self
         tableView.delegate   = self
+        
+        let gradient = SkeletonGradient(baseColor: UIColor.gray)
+        tableView.showGradientSkeleton(usingGradient: gradient)
     }
-
-
     
     private func embedFilterSearchView() {
       filterHost = UIHostingController(rootView: FilterSearchView(viewModel: viewModel))
@@ -95,18 +97,19 @@ class HomeViewController: UIViewController {
       searchFilterView.addSubview(filterHost.view)
       filterHost.view.translatesAutoresizingMaskIntoConstraints = false
     }
+    
 }
 
 
 
 // MARK: – UITableViewDataSource
-extension HomeViewController: UITableViewDataSource {
+extension CoinListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.isSearching ? viewModel.filteredCoins.count : viewModel.coins.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView[CoinCell.self, indexPath]
+        let cell = tableView[CoinListCell.self, indexPath]
         let coin = viewModel.isSearching ? viewModel.filteredCoins[indexPath.row] : viewModel.coins[indexPath.row]
         cell.configure(with: coin)
         return cell
@@ -114,8 +117,15 @@ extension HomeViewController: UITableViewDataSource {
 
 }
 
+
+extension CoinListViewController: SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "CoinListCell"
+    }
+}
+
 // MARK: – UITableViewDelegate
-extension HomeViewController: UITableViewDelegate {
+extension CoinListViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let threshold = scrollView.contentSize.height - scrollView.bounds.height - 100

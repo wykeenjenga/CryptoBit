@@ -10,7 +10,7 @@ import SwiftUI
 import Alamofire
 import AlamofireImage
 
-class CoinCell: UITableViewCell {
+class CoinListCell: UITableViewCell {
     
     private lazy var statHost: UIHostingController<CoinStatView> = {
         let initial = CoinStatView(change: 0, sparkline: [], accentColor: .purple)

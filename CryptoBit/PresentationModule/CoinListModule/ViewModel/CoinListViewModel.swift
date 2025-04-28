@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import CoreData
 
-class HomeViewModel: ObservableObject {
+class CoinListViewModel: ObservableObject {
     
     @Published var isLoading = false
     @Published var errorMessage: String?
