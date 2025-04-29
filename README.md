@@ -59,7 +59,7 @@ CryptoBit is an iOS application that fetches and displays the top 100 cryptocurr
 
 ## Requirements & Environment
 
-- **macOS:** Ventura or later (tested on MacBook Pro M2)
+- **macOS:** Ventura or later (tested on MacBook Pro M2, macOS Sequoia)
 - **Xcode:** 16.2
 - **iOS Deployment Target:** 14.0+
 - **Test Device:** iPhone 15 Pro Max (iOS 18.3)
